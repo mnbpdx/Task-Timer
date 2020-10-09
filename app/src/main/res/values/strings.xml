@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Task Timer</string>
+    <string name="brush_teeth">Brush Teeth</string>
+    <string name="make_lunch">Make Lunch</string>
+    <string name="shower">Shower</string>
+    <string name="get_ready_for_bed">Get Ready For Bed</string>
 </resources>
