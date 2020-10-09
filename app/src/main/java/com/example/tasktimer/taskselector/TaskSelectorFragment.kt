@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.tasktimer.R
 import com.example.tasktimer.databinding.FragmentTaskSelectorBinding
 
@@ -19,6 +20,13 @@ class TaskSelectorFragment : Fragment() {
 
         val binding: FragmentTaskSelectorBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_task_selector, container, false)
+
+        val viewModelFactory = TaskSelectorViewModelFactory()
+        val taskSelectorViewModel = ViewModelProvider(
+            this, viewModelFactory).get(TaskSelectorViewModel::class.java)
+
+        binding.taskSelectorViewModel = taskSelectorViewModel
+
 
         return binding.root
     }
