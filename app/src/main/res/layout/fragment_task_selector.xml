@@ -26,6 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:text="@string/brush_teeth"
+                android:onClick="@{() -> taskSelectorViewModel.brushTeethToast()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_one"

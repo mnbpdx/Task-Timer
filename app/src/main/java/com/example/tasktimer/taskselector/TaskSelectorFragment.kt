@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tasktimer.R
 import com.example.tasktimer.databinding.FragmentTaskSelectorBinding
@@ -26,8 +28,16 @@ class TaskSelectorFragment : Fragment() {
             this, viewModelFactory).get(TaskSelectorViewModel::class.java)
 
         binding.taskSelectorViewModel = taskSelectorViewModel
+        binding.lifecycleOwner = this
+
+        taskSelectorViewModel.displayBrushTeethToast.observe(viewLifecycleOwner) {
+            Toast.makeText(activity?.applicationContext, "Brush Teeth Button Pressed", Toast.LENGTH_LONG).show()
+        }
 
 
         return binding.root
     }
+
+
+
 }
