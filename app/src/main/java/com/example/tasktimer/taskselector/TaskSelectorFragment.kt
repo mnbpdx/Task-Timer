@@ -33,7 +33,6 @@ class TaskSelectorFragment : Fragment() {
 
         taskSelectorViewModel.navigateToTimer.observe(viewLifecycleOwner) {
             findNavController().navigate(TaskSelectorFragmentDirections.actionTaskSelectorFragmentToTimerFragment())
-            //Toast.makeText(activity?.applicationContext, "Button Pressed", Toast.LENGTH_LONG).show()
         }
 
 

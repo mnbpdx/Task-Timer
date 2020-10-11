@@ -25,7 +25,7 @@
                 android:id="@+id/button_two"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:onClick="@{() -> taskSelectorViewModel.startTimer()}"
+                android:onClick="@{() -> taskSelectorViewModel.navigateToTimer()}"
                 android:text="@string/brush_teeth"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

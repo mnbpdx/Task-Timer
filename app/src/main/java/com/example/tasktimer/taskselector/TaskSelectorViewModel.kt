@@ -11,7 +11,7 @@ class TaskSelectorViewModel : ViewModel() {
         get() = _navigateToTimer
 
 
-    fun startTimer() {
+    fun navigateToTimer() {
         _navigateToTimer.value = true
     }
 
