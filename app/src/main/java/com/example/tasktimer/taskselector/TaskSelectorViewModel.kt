@@ -1,19 +1,18 @@
 package com.example.tasktimer.taskselector
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class TaskSelectorViewModel() : ViewModel() {
+class TaskSelectorViewModel : ViewModel() {
 
-    private var _displayBushTeethToast = MutableLiveData<Boolean>()
-    val displayBrushTeethToast: LiveData<Boolean>
-        get() = _displayBushTeethToast
+    private var _navigateToTimer = MutableLiveData<Boolean>()
+    val navigateToTimer: LiveData<Boolean>
+        get() = _navigateToTimer
 
 
-    fun brushTeethToast() {
-        _displayBushTeethToast.value = true
+    fun startTimer() {
+        _navigateToTimer.value = true
     }
 
 }

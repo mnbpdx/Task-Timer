@@ -9,5 +9,14 @@
         android:id="@+id/taskSelectorFragment"
         android:name="com.example.tasktimer.taskselector.TaskSelectorFragment"
         android:label="TaskSelectorFragment"
-        tools:layout="@layout/fragment_task_selector"/>
+        tools:layout="@layout/fragment_task_selector">
+        <action
+            android:id="@+id/action_taskSelectorFragment_to_timerFragment"
+            app:destination="@id/timerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.example.tasktimer.timer.TimerFragment"
+        android:label="TimerFragment"
+        tools:layout="@layout/fragment_timer"/>
 </navigation>

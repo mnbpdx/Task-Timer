@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.tasktimer.R
 import com.example.tasktimer.databinding.FragmentTaskSelectorBinding
 
@@ -30,8 +31,9 @@ class TaskSelectorFragment : Fragment() {
         binding.taskSelectorViewModel = taskSelectorViewModel
         binding.lifecycleOwner = this
 
-        taskSelectorViewModel.displayBrushTeethToast.observe(viewLifecycleOwner) {
-            Toast.makeText(activity?.applicationContext, "Brush Teeth Button Pressed", Toast.LENGTH_LONG).show()
+        taskSelectorViewModel.navigateToTimer.observe(viewLifecycleOwner) {
+            findNavController().navigate(TaskSelectorFragmentDirections.actionTaskSelectorFragmentToTimerFragment())
+            //Toast.makeText(activity?.applicationContext, "Button Pressed", Toast.LENGTH_LONG).show()
         }
 
 
