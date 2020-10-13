@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tasktimer.R
+import com.example.tasktimer.database.TaskDatabase
+import com.example.tasktimer.database.TaskDatabaseDao
 import com.example.tasktimer.databinding.FragmentTimerBinding
 
 class TimerFragment : Fragment() {
@@ -21,7 +23,9 @@ class TimerFragment : Fragment() {
         val binding: FragmentTimerBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_timer, container, false)
 
-        val viewModelFactory = TimerViewModelFactory()
+        val application = requireNotNull(this.activity).application
+        val database = TaskDatabase.getInstance(application).taskDatabaseDao
+        val viewModelFactory = TimerViewModelFactory(database)
         val timerViewModel = ViewModelProvider(this, viewModelFactory)
             .get(TimerViewModel::class.java)
 
