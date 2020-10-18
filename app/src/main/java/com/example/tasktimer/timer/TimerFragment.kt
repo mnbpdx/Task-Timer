@@ -25,7 +25,7 @@ class TimerFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val database = TaskDatabase.getInstance(application).taskDatabaseDao
-        val viewModelFactory = TimerViewModelFactory(database)
+        val viewModelFactory = TimerViewModelFactory(database, application)
         val timerViewModel = ViewModelProvider(this, viewModelFactory)
             .get(TimerViewModel::class.java)
 
