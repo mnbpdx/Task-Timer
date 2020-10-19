@@ -61,9 +61,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@{timerViewModel.newestTaskEventString}"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stop_button" />
+            app:layout_constraintTop_toBottomOf="@+id/stop_button"
+            tools:text="Start Time: October 18th, 11:30AM\nEnd Time: October 18th, 11:35AM\nElapsed Time: 05:05"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -3,12 +3,14 @@ package com.example.tasktimer.timer
 import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
+import android.text.format.DateUtils.FORMAT_SHOW_DATE
 import android.text.format.DateUtils.FORMAT_SHOW_TIME
 import androidx.lifecycle.*
 import com.example.tasktimer.database.TaskDatabaseDao
 import com.example.tasktimer.database.TaskEvent
 import com.example.tasktimer.database.TimerType
 import kotlinx.coroutines.launch
+import java.util.*
 
 class TimerViewModel(
     private val database: TaskDatabaseDao,
@@ -30,7 +32,12 @@ class TimerViewModel(
     //Temporary string to test database
     val newestTaskEventString: LiveData<String> = Transformations.map(database.lastUpdateStream(
         TimerType.BRUSH_TEETH.value)) {
-        DateUtils.formatDateTime(getApplication(), it?.endTimeMilli ?: 0, FORMAT_SHOW_TIME)
+        "Start Time: " + DateUtils.formatDateTime(getApplication(), it?.startTimeMilli ?: 0,
+            FORMAT_SHOW_TIME or FORMAT_SHOW_DATE) + "\n" +
+        "End Time: " + DateUtils.formatDateTime(getApplication(), it?.endTimeMilli ?: 0,
+            FORMAT_SHOW_TIME or FORMAT_SHOW_DATE) + "\n" +
+        "Elapsed Time: " + DateUtils.formatElapsedTime(((it?.endTimeMilli ?: 0)
+                - (it?.startTimeMilli ?: 0)) / ONE_SECOND)
     }
 
     private val timer: CountDownTimer
