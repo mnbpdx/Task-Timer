@@ -11,7 +11,7 @@ data class TaskEvent(
     val eventID: Long = 0L,
 
     @ColumnInfo(name = "event_type")
-    val eventType: TimerType,
+    val eventType: TaskType,
 
     @ColumnInfo(name = "start_time_milli")
     val startTimeMilli: Long = System.currentTimeMillis(),
@@ -20,7 +20,7 @@ data class TaskEvent(
     var endTimeMilli: Long = startTimeMilli
 )
 
-enum class TimerType(val value: String) {
+enum class TaskType(val value: String) {
     BRUSH_TEETH("brush_teeth"),
     SHOWER("shower"),
     GET_READY_FOR_BED("get_ready_for_bed"),
@@ -31,12 +31,12 @@ enum class TimerType(val value: String) {
 class Converters {
 
     @TypeConverter
-    fun stringToTimerType(string: String) : TimerType? {
-        return enumValueOf<TimerType>(string.toUpperCase())
+    fun stringToTimerType(string: String) : TaskType? {
+        return enumValueOf<TaskType>(string.toUpperCase())
     }
 
     @TypeConverter
-    fun  timerTypeToString(type: TimerType?) : String? {
+    fun  timerTypeToString(type: TaskType?) : String? {
         return type?.value
     }
 }

@@ -12,57 +12,20 @@
 
     </data>
 
-
-    <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/button_two"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:onClick="@{() -> taskSelectorViewModel.navigateToTimer()}"
-                android:text="@string/brush_teeth"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/task_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_one"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-            <Button
-                android:id="@+id/button_four"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:text="@string/make_lunch"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_three"
-                app:layout_constraintTop_toBottomOf="@+id/button_two" />
-
-            <Button
-                android:id="@+id/button_one"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:text="@string/shower"
-                app:layout_constraintBottom_toBottomOf="@+id/button_two"
-                app:layout_constraintEnd_toStartOf="@+id/button_two"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/button_three"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:text="@string/get_ready_for_bed"
-                app:layout_constraintBottom_toBottomOf="@+id/button_four"
-                app:layout_constraintEnd_toStartOf="@+id/button_four"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
 
 </layout>

@@ -8,9 +8,8 @@ import android.text.format.DateUtils.FORMAT_SHOW_TIME
 import androidx.lifecycle.*
 import com.example.tasktimer.database.TaskDatabaseDao
 import com.example.tasktimer.database.TaskEvent
-import com.example.tasktimer.database.TimerType
+import com.example.tasktimer.database.TaskType
 import kotlinx.coroutines.launch
-import java.util.*
 
 class TimerViewModel(
     private val database: TaskDatabaseDao,
@@ -31,7 +30,7 @@ class TimerViewModel(
 
     //Temporary string to test database
     val newestTaskEventString: LiveData<String> = Transformations.map(database.lastUpdateStream(
-        TimerType.BRUSH_TEETH.value)) {
+        TaskType.BRUSH_TEETH.value)) {
         "Start Time: " + DateUtils.formatDateTime(getApplication(), it?.startTimeMilli ?: 0,
             FORMAT_SHOW_TIME or FORMAT_SHOW_DATE) + "\n" +
         "End Time: " + DateUtils.formatDateTime(getApplication(), it?.endTimeMilli ?: 0,
@@ -90,7 +89,7 @@ class TimerViewModel(
         timer.cancel()
         val endTime = System.currentTimeMillis()
         viewModelScope.launch {
-           database.getTopEvent(TimerType.BRUSH_TEETH.value)?.let { event ->
+           database.getTopEvent(TaskType.BRUSH_TEETH.value)?.let { event ->
                 event.endTimeMilli = endTime
                 this@TimerViewModel.update(event)
             }
@@ -99,7 +98,7 @@ class TimerViewModel(
 
     fun startTask() {
         viewModelScope.launch {
-            val newTask = TaskEvent(eventType = TimerType.BRUSH_TEETH)
+            val newTask = TaskEvent(eventType = TaskType.BRUSH_TEETH)
 
             insert(newTask)
 
