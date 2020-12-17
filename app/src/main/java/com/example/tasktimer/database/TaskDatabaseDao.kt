@@ -1,24 +1,21 @@
 package com.example.tasktimer.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
-import kotlinx.coroutines.flow.Flow
+import androidx.room.*
 
 @Dao
 interface TaskDatabaseDao {
 
     @Insert
-    suspend fun insert(event: TaskEvent)
+    suspend fun insert(task: Task)
 
     @Update
-    suspend fun update(event: TaskEvent)
+    suspend fun update(task: Task)
 
-    @Query("SELECT * FROM task_event_table WHERE event_type = :type ORDER BY eventID DESC LIMIT 1")
-    fun lastUpdateStream(type: String) : LiveData<TaskEvent?>
+    @Query("SELECT * FROM task_table ORDER BY taskId DESC")
+    fun getTaskList(): LiveData<List<Task>>
 
-    @Query("SELECT * FROM task_event_table WHERE event_type = :type ORDER BY eventID DESC LIMIT 1")
-    suspend fun getTopEvent(type: String) : TaskEvent?
+    @Transaction
+    @Query("SELECT * from task_table")
+    fun getTasksWithEvents(): List<TaskWithTaskEvents>
 }

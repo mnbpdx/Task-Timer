@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasktimer.databinding.ListItemTaskBinding
-import com.example.tasktimer.taskdatabase.Task
+import com.example.tasktimer.database.Task
 
 //TODO Generalized DataItems is half finished in this file. Add when in OCV, add viewTypes + checks
 
@@ -62,7 +62,7 @@ sealed class DataItem {
     abstract val id: Long
 
     data class TaskItem(val task: Task): DataItem() {
-        override val id = task.id
+        override val id = task.taskId
     }
 }
 

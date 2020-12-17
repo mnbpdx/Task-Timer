@@ -6,13 +6,15 @@ import android.text.format.DateUtils
 import android.text.format.DateUtils.FORMAT_SHOW_DATE
 import android.text.format.DateUtils.FORMAT_SHOW_TIME
 import androidx.lifecycle.*
-import com.example.tasktimer.database.TaskDatabaseDao
+import com.example.tasktimer.database.Task
+import com.example.tasktimer.database.TaskEventDatabaseDao
 import com.example.tasktimer.database.TaskEvent
 import com.example.tasktimer.database.TaskType
 import kotlinx.coroutines.launch
 
 class TimerViewModel(
-    private val database: TaskDatabaseDao,
+    private val task: Task,
+    private val eventDatabase: TaskEventDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -29,8 +31,8 @@ class TimerViewModel(
     //private var newestTaskEvent = MutableLiveData<TaskEvent?>()
 
     //Temporary string to test database
-    val newestTaskEventString: LiveData<String> = Transformations.map(database.lastUpdateStream(
-        TaskType.BRUSH_TEETH.value)) {
+    val newestTaskEventString: LiveData<String> = Transformations.map(eventDatabase.lastUpdateStream(
+        task.taskId)) {
         "Start Time: " + DateUtils.formatDateTime(getApplication(), it?.startTimeMilli ?: 0,
             FORMAT_SHOW_TIME or FORMAT_SHOW_DATE) + "\n" +
         "End Time: " + DateUtils.formatDateTime(getApplication(), it?.endTimeMilli ?: 0,
@@ -63,11 +65,11 @@ class TimerViewModel(
     }
 
     private suspend fun insert(task: TaskEvent) {
-        database.insert(task)
+        eventDatabase.insert(task)
     }
 
     private suspend fun update(task: TaskEvent) {
-        database.update(task)
+        eventDatabase.update(task)
     }
 
 //    private fun initializeNewestTaskEvent() {
@@ -89,7 +91,7 @@ class TimerViewModel(
         timer.cancel()
         val endTime = System.currentTimeMillis()
         viewModelScope.launch {
-           database.getTopEvent(TaskType.BRUSH_TEETH.value)?.let { event ->
+           eventDatabase.getTopEvent(task.taskId)?.let { event ->
                 event.endTimeMilli = endTime
                 this@TimerViewModel.update(event)
             }
@@ -98,7 +100,7 @@ class TimerViewModel(
 
     fun startTask() {
         viewModelScope.launch {
-            val newTask = TaskEvent(eventType = TaskType.BRUSH_TEETH)
+            val newTask = TaskEvent(eventTypeId = task.taskId)
 
             insert(newTask)
 

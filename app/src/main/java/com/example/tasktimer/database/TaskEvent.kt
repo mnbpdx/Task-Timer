@@ -8,10 +8,10 @@ import androidx.room.TypeConverter
 @Entity(tableName = "task_event_table")
 data class TaskEvent(
     @PrimaryKey(autoGenerate = true)
-    val eventID: Long = 0L,
+    val eventId: Long = 0L,
 
-    @ColumnInfo(name = "event_type")
-    val eventType: TaskType,
+    @ColumnInfo(name = "event_type_id")
+    val eventTypeId: Long = 0L,
 
     @ColumnInfo(name = "start_time_milli")
     val startTimeMilli: Long = System.currentTimeMillis(),
@@ -25,7 +25,6 @@ enum class TaskType(val value: String) {
     SHOWER("shower"),
     GET_READY_FOR_BED("get_ready_for_bed"),
     MAKE_LUNCH("make_lunch")
-
 }
 
 class Converters {
